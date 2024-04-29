@@ -10,8 +10,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit{
   public loginForm!:FormGroup;
- constructor(private fb:FormBuilder,private authService :AuthService,
- private router:Router){}
+ constructor(public fb:FormBuilder,public authService :AuthService,
+ public router:Router){}
   ngOnInit(): void {
     this.loginForm=this.fb.group({
       username:this.fb.control(''),
@@ -23,9 +23,10 @@ export class LoginComponent implements OnInit{
     let username=this.loginForm.value.username;
     let password=this.loginForm.value.password;
    let auth:boolean= this.authService.login(username,password);
-   if(auth==true){
+
+   if(auth==true)
     this.router.navigateByUrl('/admin')
-   }
+   
     }
 
 }

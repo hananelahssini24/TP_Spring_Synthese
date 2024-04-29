@@ -13,11 +13,11 @@ export class AuthService {
   public isAuthenticated:boolean=false;
   public roles:[]=[];
   constructor(private router:Router) { }
-  public login(username:string,password:string){
+  public login(username:string,password:string):boolean{
     if(this.users[username] && this.users[username]['password']==password)
     {this.username=username;
     this.isAuthenticated=true;
-    this.roles=this.username[username]['roles'];
+    this.roles = this.users[username]['roles'];
     return true;}
     else
     return false;

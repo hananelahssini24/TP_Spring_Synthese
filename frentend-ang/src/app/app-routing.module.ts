@@ -9,11 +9,13 @@ import { LoginComponent } from './login/login.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { StudentsComponent } from './students/students.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminTemplateComponent,children:[
+  { path: 'admin', component: AdminTemplateComponent,canActivate:[AuthGuard],
+  children:[
     { path: 'home', component: HomeComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'dashboard', component: DashboardComponent },
