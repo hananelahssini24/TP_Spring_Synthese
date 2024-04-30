@@ -10,6 +10,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { ProfileComponent } from './profile/profile.component';
 import { StudentsComponent } from './students/students.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthorizationGuard } from './guards/authorization.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -21,7 +22,9 @@ const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'students', component: StudentsComponent },
     { path: 'payments', component: PaymentsComponent },
-    { path: 'loadStudents', component: LoadStudentsComponent },
+    { path: 'loadStudents', component: LoadStudentsComponent ,
+    canActivate:[AuthorizationGuard],data:{roles:'ADMIN'}
+  },
     { path: 'loadPayments', component: LoadPaymentsComponent },
   ] },
 ];
