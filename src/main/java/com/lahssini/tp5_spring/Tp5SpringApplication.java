@@ -35,7 +35,7 @@ public class Tp5SpringApplication {
                     .build());
             //3eme
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .firstName("Hamza").code("566")
+                    .firstName("salah").code("566")
                     //.programmId("SDIA")
                     .build());
             //4eme
@@ -49,7 +49,7 @@ public class Tp5SpringApplication {
                 for(int i=0;i<10;i++){
                     int index =random.nextInt(paymentTypes.length);
                     Payment payment=Payment.builder()
-                            .amount(1000+(int)(Math.random()+20000))
+                            .amount(1000+(int)(Math.random()*20000))
                             .type(paymentTypes[index])
                             .status(PaymentStatus.CREATED)
                             .date(LocalDate.now())

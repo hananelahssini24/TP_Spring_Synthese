@@ -1,10 +1,36 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
   styleUrl: './payments.component.css'
 })
-export class PaymentsComponent {
+export class PaymentsComponent implements OnInit{
+  public payments:any;
+  public dataSource:any;
+  public displayedColumns=['id','date','amount','type','status','firstName'];
+  @ViewChild(MatPaginator) paginator!:MatPaginator;
+  @ViewChild(MatSort) sort!:MatPaginator;
+  constructor(public http:HttpClient){
+
+  }
+ngOnInit(): void {
+  this.http.get("http://localhost:8084/payments")
+  .subscribe({
+    next:data=>{
+      this.payments=data;
+      this.dataSource=new MatTableDataSource(this.payments);
+      this.dataSource.paginator=this.paginator;
+      this.dataSource.sort=this.sort;
+    },
+    error:err=>{
+      console.log(err);
+    }
+  })
+}
 
 }
