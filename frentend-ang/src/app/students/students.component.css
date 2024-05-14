@@ -1,0 +1,10 @@
+
+.table th {
+  border: solid 1px black;
+  padding: 10px;
+  background-color: pink;
+}
+ .table td {
+  border: solid 1px black;
+  padding: 10px;
+}

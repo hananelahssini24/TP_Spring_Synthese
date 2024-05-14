@@ -6,7 +6,57 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            Students
+          <table class="table">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Code</th>
+              <th>Program ID</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of students">
+            <td>{{student.id}}</td>
+              <td>{{student.firstName}}</td>
+              <td>{{student.lastName}}</td>
+              <td>{{student.code}}</td>
+              <td>{{student.programId}}</td>
+            </tr>
+            </tbody>
+          </table>
         </mat-card-content>
     </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Students</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table  mat-table  [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef > Id. </th>
+          <td mat-cell *matCellDef="let student"> {{student.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef > firstName </th>
+          <td mat-cell *matCellDef="let student"> {{student.firstName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef > lastName </th>
+          <td mat-cell *matCellDef="let student"> {{student.lastName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef > Code </th>
+          <td mat-cell *matCellDef="let student"> {{student.code}} </td>
+        </ng-container>
+        <ng-container matColumnDef="programId">
+          <th mat-header-cell *matHeaderCellDef > ProgramId </th>
+          <td mat-cell *matCellDef="let student"> {{student.programId}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
 </div>

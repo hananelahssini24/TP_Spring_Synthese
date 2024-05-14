@@ -6,3 +6,19 @@ export interface  Student{
   programId:string,
   photo:string
 }
+export interface Payment{
+  id:number,
+  date:string,
+  amount:number,
+  type:string,
+  status:string,
+  file:string,
+  student:Student
+}
+export enum PaymentType{
+  CASH,CHECK,TRANSFER,DEPOT
+}
+export enum PaymentStatus {
+  CREATED,VALIDATED,REJECTED
+}
+

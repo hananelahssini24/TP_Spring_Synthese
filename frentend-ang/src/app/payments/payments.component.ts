@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import {StudentsService} from "../services/students.service";
 
 @Component({
   selector: 'app-payments',
@@ -15,11 +16,11 @@ export class PaymentsComponent implements OnInit{
   public displayedColumns=['id','date','amount','type','status','firstName'];
   @ViewChild(MatPaginator) paginator!:MatPaginator;
   @ViewChild(MatSort) sort!:MatPaginator;
-  constructor(public http:HttpClient){
+  constructor(private studentsService:StudentsService){
 
   }
 ngOnInit(): void {
-  this.http.get("http://localhost:8084/payments")
+  this.studentsService.getAllPayments()
   .subscribe({
     next:data=>{
       this.payments=data;
