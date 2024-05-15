@@ -17,4 +17,8 @@ export class StudentsService {
   public getAllStudents():Observable<Array<Student>>{
     return this.http.get<Array<Student>>(environment.backendHost+"/students");
   }
+
+  public getAllStudentPayments(code:string):Observable<Array<Payment>>{
+    return this.http.get<Array<Payment>>(`${environment.backendHost}/students/${code}/payments`);
+  }
 }

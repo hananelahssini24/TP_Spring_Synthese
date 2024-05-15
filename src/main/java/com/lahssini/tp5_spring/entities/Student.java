@@ -15,7 +15,7 @@ public class Student {
     private String email;
     @Column(unique = true)
     private String code;
-    //private String programmId;
+    private String programId;
     private String photo;
 
 }

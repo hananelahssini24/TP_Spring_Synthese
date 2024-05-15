@@ -25,23 +25,23 @@ public class Tp5SpringApplication {
             , PaymentRepository paymentRepository){
         return args->{
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .firstName("Mohamed").code("1234")
-                    //.programmId("SDIA")
+                    .firstName("Mohamed").code("1234").lastName("Alaoui")
+                    .programId("SDIA")
                     .build());
             //2eme
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .firstName("Hanane").code("1245")
-                    //.programmId("BDCC")
+                    .firstName("Hanane").code("1245").lastName("Lahssini")
+                    .programId("BDCC")
                     .build());
             //3eme
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .firstName("salah").code("566")
-                    //.programmId("SDIA")
+                    .firstName("Jad").code("566").lastName("Safiri")
+                    .programId("SDIA")
                     .build());
             //4eme
             studentRepository.save(Student.builder().id(UUID.randomUUID().toString())
-                    .firstName("Janat").code("9637")
-                    //.programmId("SDIA")
+                    .firstName("Janat").code("9637").lastName("Lahssini")
+                    .programId("SDIA")
                     .build());
             PaymentType[] paymentTypes=PaymentType.values();
             Random random=new Random();
