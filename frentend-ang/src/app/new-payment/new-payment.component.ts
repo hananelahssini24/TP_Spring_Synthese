@@ -36,18 +36,22 @@ export class NewPaymentComponent implements OnInit{
   }
 
   selectFile(event:any){
-    if(event.taget.files.lenght>0){
-      let file=event.taget.files[0];
+    if(event.target.files.length>0){
+      let file=event.target.files[0];
       this.paymentFormGroup.patchValue({
         fileSource :file,
         fileName:file.name
       });
       this.pdfFileUrl=window.URL.createObjectURL(file);
+
+
     }
   }
   savePayment(){
+    let date :Date=new Date(this.paymentFormGroup.value.date);
+    let formattedDate:string=date.getDate()+"/"+(date.getMonth()+1)+'/'+date.getFullYear();
     let formData :FormData =new FormData();
-    formData.set('date',this.paymentFormGroup.value.date);
+    formData.set('date',formattedDate);
     formData.set('amount',this.paymentFormGroup.value.amount);
     formData.set('type',this.paymentFormGroup.value.type);
     formData.set('studentCode',this.paymentFormGroup.value.studentCode);

@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.UUID;
+
+import com.lahssini.tp5_spring.dtos.NewPaymentDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.lahssini.tp5_spring.entities.Payment;
@@ -24,7 +26,7 @@ public class PaymentService {
         this.paymentRepository=paymentRepository;
         this.studentRepository=studentRepository;
     }
-    public Payment savePayment(MultipartFile file, LocalDate date,double amount,String studentCode,PaymentType type) 
+    public Payment savePayment(MultipartFile file, NewPaymentDTO newPaymentDTO)
     throws IOException {
         Path folderPath = Paths.get(System.getProperty("user.home"), "enset-data", "payments");
         if (!Files.exists(folderPath)) {
@@ -33,11 +35,11 @@ public class PaymentService {
         String fileName =UUID.randomUUID().toString();
         Path filePath = Paths.get(System.getProperty("user.home"), "enset-data", "payments",fileName+".pdf");
         Files.copy(file.getInputStream(),filePath);
-       Student student=studentRepository.findByCode(studentCode);
+       Student student=studentRepository.findByCode(newPaymentDTO.getStudentCode());
         Payment payment=Payment.builder()
-        .date(date)
-        .amount(amount)
-        .type(type)
+        .date(newPaymentDTO.getDate())
+        .amount(newPaymentDTO.getAmount())
+        .type(newPaymentDTO.getType())
         .student(student)
         .file(filePath.toUri().toString())
         .status(PaymentStatus.CREATED)

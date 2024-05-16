@@ -1,5 +1,6 @@
 package com.lahssini.tp5_spring.web;
 
+import com.lahssini.tp5_spring.dtos.NewPaymentDTO;
 import com.lahssini.tp5_spring.entities.Payment;
 import com.lahssini.tp5_spring.entities.PaymentStatus;
 import com.lahssini.tp5_spring.entities.PaymentType;
@@ -70,9 +71,9 @@ public class PaymentRestController {
         return paymentService.updaPaymentStatus(status, id);
     }
     @PostMapping(path = "/payments", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment savePayment(@RequestParam MultipartFile file, LocalDate date,double amount,String studentCode,PaymentType type) 
+    public Payment savePayment(@RequestParam("file") MultipartFile file, NewPaymentDTO newPaymentDTO)
     throws IOException {
-        return this.paymentService.savePayment(file, date, amount, studentCode, type);
+        return this.paymentService.savePayment(file, newPaymentDTO);
     }
 
     @GetMapping(path = "/paymentFile/{paymentId}",produces=MediaType.APPLICATION_PDF_VALUE)
