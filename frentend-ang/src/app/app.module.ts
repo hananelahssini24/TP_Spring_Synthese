@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {forwardRef, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import {NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthorizationGuard } from './guards/authorization.guard';
 import {  HttpClientModule } from '@angular/common/http';
@@ -35,6 +35,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {PdfViewerModule} from "ng2-pdf-viewer";
+import { MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { PaymentDetailsComponent } from './payment-details/payment-details.component';
+
+let MyInputField :any;
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +54,7 @@ import {PdfViewerModule} from "ng2-pdf-viewer";
     DashboardComponent,
     StudentDetailsComponent,
     NewPaymentComponent,
+    PaymentDetailsComponent,
 
   ],
   imports: [
@@ -70,13 +76,19 @@ import {PdfViewerModule} from "ng2-pdf-viewer";
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [
     provideAnimationsAsync(),
     AuthGuard,
-    AuthorizationGuard
+    AuthorizationGuard,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MyInputField),
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -13,7 +13,7 @@ export class StudentDetailsComponent implements OnInit{
   studentCode!:string;
   studentPayments!:Array<Payment>;
   paymentsDataSource!:MatTableDataSource<Payment>
-  public displayedColumns=['id','date','amount','type','status','firstName'];
+  public displayedColumns=['id','date','amount','type','status','firstName','detail'];
   constructor(private activatedRoute:ActivatedRoute,private studentsService:StudentsService,private router:Router){}
   ngOnInit(): void {
       this.studentCode=this.activatedRoute.snapshot.params['code'];
@@ -31,6 +31,8 @@ export class StudentDetailsComponent implements OnInit{
 
   newPayment() {
     this.router.navigateByUrl(`/admin/new-payment/${this.studentCode}`);
-
   }
+  paymentDetails(payment : Payment) {
+    this.router.navigateByUrl("/admin/payment-details/"+payment.id);
+    }
 }

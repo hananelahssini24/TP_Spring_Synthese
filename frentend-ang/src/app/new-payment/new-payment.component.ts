@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import { PaymentType } from '../model/students.model';
 import { StudentsService } from '../services/students.service';
+import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api';
 
 @Component({
   selector: 'app-new-payment',
@@ -14,6 +15,7 @@ export class NewPaymentComponent implements OnInit{
   studentCode!:string;
   paymentTypes:string[]=[];
   pdfFileUrl!:string;
+  showProgress : boolean = false;
   constructor(private  fb:FormBuilder,private activatedRoute:ActivatedRoute,private studentsService:StudentsService) {
   }
   ngOnInit() {
@@ -48,6 +50,7 @@ export class NewPaymentComponent implements OnInit{
     }
   }
   savePayment(){
+    this.showProgress=true;
     let date :Date=new Date(this.paymentFormGroup.value.date);
     let formattedDate:string=date.getDate()+"/"+(date.getMonth()+1)+'/'+date.getFullYear();
     let formData :FormData =new FormData();
@@ -57,7 +60,8 @@ export class NewPaymentComponent implements OnInit{
     formData.set('studentCode',this.paymentFormGroup.value.studentCode);
     formData.set('file',this.paymentFormGroup.value.fileSource);
     this.studentsService.savePayment(formData).subscribe({
-      next:vaue=>{
+      next:(value)=>{
+        this.showProgress=false;
         alert('Payment Saved successfuly!');
       },
       error:err=>{
@@ -65,4 +69,8 @@ export class NewPaymentComponent implements OnInit{
       }
     })
   }
+  afterLoadComplete($event: any){
+    console.log($event);
+
+}
 }
